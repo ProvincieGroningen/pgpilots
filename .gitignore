@@ -1,0 +1,9 @@
+Build/
+**/bin/
+**/obj/
+*.user
+*.orig
+*.psess
+.vs/
+*.vspx
+*.vsp
