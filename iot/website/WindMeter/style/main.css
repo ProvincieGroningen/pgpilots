@@ -1,0 +1,39 @@
+﻿body { font-family: 'Source Code Pro'; }
+
+#speedContainer {
+    width: 30px;
+    float: left;
+    background-color: #000;
+}
+
+#compass {
+    width: 350px;
+    height: 350px;
+}
+
+.speed {
+
+    margin: 2px;
+    padding: 1px;
+    height: 10px;
+}
+
+.highPassive {
+    background-color: #ff0000;
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.highActive {
+    background-color: #ff0000;
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.lowPassive {
+    background-color: #00ff00;
+    background-color: rgba(0, 255, 0, 0.3);
+}
+
+.lowActive {
+    background-color: #00ff00;
+    background-color: rgba(0, 255, 0, 1);
+}
