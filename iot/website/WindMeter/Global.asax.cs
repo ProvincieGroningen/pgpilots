@@ -9,8 +9,8 @@ namespace WindMeter
         private static readonly string[] Nodes = {"nodes/02017401/packets"};
 
         private static MqttWorker _mqttWorker;
-        public static WindMeasurement LastReceivedWindMeasurement { get; private set; }
-        public static DateTime LastReceived { get; private set; }
+        public static WindMeasurement LastReceivedWindMeasurement { get; set; }
+        public static DateTime LastReceived { get; set; }
 
         protected void Application_Start(object sender, EventArgs e)
         {

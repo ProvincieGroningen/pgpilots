@@ -27,6 +27,7 @@ namespace WindMeter
             client.Connect(Guid.NewGuid().ToString());
             client.Subscribe(nodes, new[] {MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE});
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
+            WorkerSupportsCancellation = true;
         }
 
         protected override void OnDoWork(DoWorkEventArgs e)
