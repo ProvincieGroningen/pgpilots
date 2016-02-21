@@ -10,8 +10,11 @@ using NUnit.Framework;
 
 namespace WindMeter
 {
-    public class Decryptor
+    public static class Decryptor
     {
+        // Thanks to https://github.com/willem4ever/node-red-ttn/blob/master/90-TTN.js
+        // and http://forum.thethingsnetwork.org/t/parse-data/789/7
+        // 
         public class DecryptedLoraMessage
         {
             public string Node;
@@ -19,7 +22,7 @@ namespace WindMeter
         }
 
         [Test]
-        public void TestDecription()
+        public static void TestDecription()
         {
             const string dataRaw = "gAF0AQIAAAABTf5C11bgiNx9ZPm5klWCxl4EzEpDG6udqcozu6zWy9w="; // the data encrypted
             var key = new byte[]
@@ -33,7 +36,7 @@ namespace WindMeter
         }
 
         [Test]
-        public void TestSpeed()
+        public static void TestSpeed()
         {
             const string dataRaw = "gAF0AQIAAAABTf5C11bgiNx9ZPm5klWCxl4EzEpDG6udqcozu6zWy9w="; // the data encrypted
             var key = new byte[]
@@ -50,7 +53,7 @@ namespace WindMeter
             PAssert.That(() => t.ElapsedMilliseconds < 5000);
         }
 
-        public DecryptedLoraMessage Decrypt(byte[] data, byte[] key, byte[] iv)
+        public static DecryptedLoraMessage Decrypt(byte[] data, byte[] key, byte[] iv)
         {
             // int8 -> sbyte
             // uint8 -> byte
