@@ -19,7 +19,7 @@ namespace WindMeter
             else
             {
                 Global.LastReceivedWindMeasurement = Global.LastReceivedWindMeasurement ?? new WindMeasurement();
-                Global.LastReceivedWindMeasurement.Direction = (WindDirection) int.Parse(context.Request["richting"]);
+                Global.LastReceivedWindMeasurement.Direction = decimal.Parse(context.Request["richting"]);
                 Global.LastReceivedWindMeasurement.Speed = decimal.Parse(context.Request["snelheid"]);
                 Global.LastReceived = DateTime.Now;
             }

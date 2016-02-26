@@ -11,12 +11,20 @@ namespace WindMeter
         private static MqttWorker _mqttWorker;
         public static WindMeasurement LastReceivedWindMeasurement { get; set; }
         public static DateTime LastReceived { get; set; }
+        public static string Debug { get; private set; }
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            _mqttWorker = new MqttWorker(MqttBrokerHostname, Nodes);
-            _mqttWorker.WindReadEvent += _mqttWorker_WindReadEvent;
-            _mqttWorker.RunWorkerAsync();
+            try
+            {
+                _mqttWorker = new MqttWorker(MqttBrokerHostname, Nodes);
+                _mqttWorker.WindReadEvent += _mqttWorker_WindReadEvent;
+                _mqttWorker.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug = ex.Message;
+            }
         }
 
         private void _mqttWorker_WindReadEvent(object sender, WindReadEventArgs e)
