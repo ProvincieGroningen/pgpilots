@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using uPLibrary.Networking.M2Mqtt;
@@ -36,7 +35,6 @@ namespace WindMeter
             while (!CancellationPending)
             {
                 Thread.Sleep(1000);
-                Debug.Print($"Mqtt thread running {Thread.CurrentThread.ManagedThreadId}");
             }
         }
 

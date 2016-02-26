@@ -9,6 +9,12 @@
 #compass {
     width: 350px;
     height: 350px;
+    margin-left: 20px;
+}
+
+#chart {
+    width: 600px;
+    height: 350px;
 }
 
 .speed {

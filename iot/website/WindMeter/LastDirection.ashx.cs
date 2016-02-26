@@ -9,8 +9,18 @@ namespace WindMeter
         {
             context.Response.ContentType = "text/plain";
             context.Response.Write(Global.LastReceivedWindMeasurement == null
-                ? new Random().Next(1, 16)
+                ? GetRandomValue()
                 : (int) Global.LastReceivedWindMeasurement.Direction);
+        }
+
+        private static int? RandomValue;
+
+        static int GetRandomValue()
+        {
+            RandomValue = Math.Abs((RandomValue ?? new Random().Next(1, 10)) + 5 - new Random().Next(1, 10));
+            if (RandomValue < 0)
+                RandomValue = 0;
+            return RandomValue.Value;
         }
 
         public bool IsReusable => false;
