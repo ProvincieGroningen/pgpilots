@@ -30,3 +30,6 @@ iot/website/packages/Microsoft.Net.Compilers.1.0.0/ThirdPartyNotices.rtf
 iot/website/packages/Microsoft.Net.Compilers.1.0.0/tools/Microsoft.CSharp.Core.targets
 iot/website/packages/Microsoft.Net.Compilers.1.0.0/tools/Microsoft.VisualBasic.Core.targets
 iot/website/packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe.config
+iot/website/packages,iot/website/WindMeter/Properties/PublishProfiles
+iot/website/packages/
+iot/website/WindMeter/Properties/PublishProfiles/
