@@ -75,14 +75,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="image\compass.png" />
+    <Content Include="image\needle2.png" />
+    <Content Include="image\needle4.png" />
+    <Content Include="image\needle3.png" />
+    <Content Include="image\needle1.png" />
     <Content Include="packages.config" />
-    <Content Include="LastDirection.ashx" />
-    <Content Include="LastSpeed.ashx" />
-    <Content Include="LastReceived.ashx" />
     <Content Include="Debug.ashx" />
+    <Content Include="CurrentData.ashx" />
+    <Content Include="Meters.ashx" />
     <None Include="Properties\PublishProfiles\tc.pubxml" />
     <Content Include="script\gateways.js" />
-    <Content Include="SetWind.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -107,20 +109,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LastReceived.ashx.cs">
-      <DependentUpon>LastReceived.ashx</DependentUpon>
+    <Compile Include="CurrentData.ashx.cs">
+      <DependentUpon>CurrentData.ashx</DependentUpon>
     </Compile>
-    <Compile Include="LastSpeed.ashx.cs">
-      <DependentUpon>LastSpeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="LastDirection.ashx.cs">
-      <DependentUpon>LastDirection.ashx</DependentUpon>
+    <Compile Include="Meters.ashx.cs">
+      <DependentUpon>Meters.ashx</DependentUpon>
     </Compile>
     <Compile Include="MqttWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetWind.ashx.cs">
-      <DependentUpon>SetWind.ashx</DependentUpon>
-    </Compile>
     <Compile Include="ThingsMessage.cs" />
     <Compile Include="WindMeasurement.cs" />
   </ItemGroup>

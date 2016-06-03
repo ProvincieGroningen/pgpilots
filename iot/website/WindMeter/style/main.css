@@ -1,20 +1,41 @@
 ﻿body { font-family: 'Source Code Pro'; }
 
-#speedContainer {
-    width: 30px;
+#meters {
+    width: 300px;
     float: left;
-    background-color: #000;
+}
+
+#compassGroup {
+    position: absolute;
+    left: 150px;
+    top: 20px;
 }
 
 #compass {
     width: 350px;
     height: 350px;
-    margin-left: 20px;
+    z-index: 0;
+    top: 0px;
+    left: 0px;
+    position: absolute;
 }
 
+.needle {
+    width: 350px;
+    height: 350px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+}
+
+
 #chart {
+    left: 600px;
     width: 600px;
     height: 350px;
+    position: absolute; 
 }
 
 .speed {
@@ -42,4 +63,17 @@
 .lowActive {
     background-color: #00ff00;
     background-color: rgba(0, 255, 0, 1);
+}
+
+.legendColor0 {
+    background-color: red;
+}
+.legendColor1 {
+    background-color: green;
+}
+.legendColor2 {
+    background-color: blue;
+}
+.legendColor3 {
+    background-color: blueviolet;
 }
