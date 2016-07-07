@@ -24,17 +24,15 @@ begin
     else new_column_name := 'DEZEBESTAATZEKERNIET';
     end if;
     
-    -- execute immediate
-    dbms_output.put_line('alter table ' || r_coda_columns.owner || '.' || r_coda_columns.table_name || ' rename column ' || r_coda_columns.column_name || ' to ' || new_column_name);
+    execute immediate 'alter table ' || r_coda_columns.owner || '.' || r_coda_columns.table_name || ' rename column ' || r_coda_columns.column_name || ' to ' || new_column_name;
     
-    /*
     update sde.column_registry 
     set column_name = new_column_name
     where 1=1
       and owner = r_coda_columns.owner
       and table_name = r_coda_columns.table_name
       and column_name = r_coda_columns.column_name;
-    */
+
   end loop;
   close c_coda_columns;
 end;
