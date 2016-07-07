@@ -8,7 +8,9 @@ declare
     join SDE.COLUMN_REGISTRY c on t.table_name = c.table_name and t.owner = c.owner
     where 1=1
       and ( lower(c.COLUMN_NAME) = 'coda_1e' 
-           or lower(c.COLUMN_NAME) = 'coda_3e');
+           or lower(c.COLUMN_NAME) = 'coda_3e')
+      and rownum = 1
+    ;
   r_coda_columns c_coda_columns%rowtype;
   new_column_name varchar2(200);
 begin
