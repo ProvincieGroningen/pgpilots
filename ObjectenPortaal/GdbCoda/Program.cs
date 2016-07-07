@@ -71,7 +71,7 @@ namespace GdbCoda
                 {
                     try
                     {
-                        r.SetInteger(NewCoda4, GetCoda4Value(r.GetInteger(OldCoda3)));
+                        r.SetString(NewCoda4, GetCoda4Value(r.GetString(OldCoda3)));
                     }
                     catch (Exception ex)
                     {
@@ -86,7 +86,7 @@ namespace GdbCoda
             return -1*coda1Value;
         }
 
-        private static int GetCoda4Value(int coda3Value)
+        private static string GetCoda4Value(string coda3Value)
         {
             return coda3Value;
         }
