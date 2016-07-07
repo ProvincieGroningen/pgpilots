@@ -36,6 +36,12 @@ namespace GdbCodaInventarisatie
             {
                 Console.WriteLine($"Aanroep: {nameof(GdbCodaInventarisatie)} <Naam van folder met GDB's>");
             }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Press any key to continue ... ");
+            Console.Read();
         }
 
         private static LogResult ListGdb(string gdbFileName)
