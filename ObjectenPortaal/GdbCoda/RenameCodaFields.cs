@@ -10,27 +10,20 @@ namespace GdbCoda
     {
         private static Action<string> _log;
 
-        public static void Rename(string[] args, Action<string> log)
+        public static void Rename(string rootDirName, Action<string> log)
         {
             _log = log;
-            if (args.Length == 1)
+            var rootDir = new DirectoryInfo(rootDirName);
+            foreach (var dir in rootDir.GetDirectories("*.gdb", SearchOption.TopDirectoryOnly))
             {
-                var rootDir = new DirectoryInfo(args[0]);
-                foreach (var dir in rootDir.GetDirectories("*.gdb", SearchOption.TopDirectoryOnly))
+                try
                 {
-                    try
-                    {
-                        ModifyGdb(dir.FullName);
-                    }
-                    catch (Exception ex)
-                    {
-                        _log($"Fout: {ex.Message}");
-                    }
+                    ModifyGdb(dir.FullName);
                 }
-            }
-            else
-            {
-                _log($"Aanroep: {nameof(GdbCoda)} <Naam van folder met GDB's>");
+                catch (Exception ex)
+                {
+                    _log($"Fout: {ex.Message}");
+                }
             }
             _log = null;
         }
@@ -51,8 +44,8 @@ namespace GdbCoda
             var table = geodatabase.OpenTable(tableName);
             if (FieldsExist(table, new[] {OldCoda1, OldCoda3}))
             {
-                EnsureField(table, NewCoda2);
-                EnsureField(table, NewCoda4);
+                EnsureField(table, NewCoda2, FieldType.Integer);
+                EnsureField(table, NewCoda4, FieldType.String);
                 UpdateFields(table);
                 EnsureFieldIsRemoved(table, OldCoda1);
                 EnsureFieldIsRemoved(table, OldCoda3);
@@ -95,11 +88,11 @@ namespace GdbCoda
             return coda3Value;
         }
 
-        private static void EnsureField(Table table, string fieldName)
+        private static void EnsureField(Table table, string fieldName, FieldType fieldType)
         {
             try
             {
-                table.AddField(CodaFieldDef(fieldName));
+                table.AddField(CodaFieldDef(fieldName, fieldType));
             }
             catch
             {
@@ -134,7 +127,7 @@ namespace GdbCoda
             return true;
         }
 
-        private static FieldDef CodaFieldDef(string fieldName) =>
-            new FieldDef {Name = fieldName, Alias = fieldName, IsNullable = true, Type = FieldType.Integer};
+        private static FieldDef CodaFieldDef(string fieldName, FieldType fieldType) =>
+            new FieldDef {Name = fieldName, Alias = fieldName, IsNullable = true, Type = fieldType};
     }
 }

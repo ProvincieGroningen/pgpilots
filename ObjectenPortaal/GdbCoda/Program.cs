@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace GdbCoda
 {
@@ -6,7 +7,9 @@ namespace GdbCoda
     {
         private static void Main(string[] args)
         {
-            RenameCodaFields.Rename(args, Console.WriteLine);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }
