@@ -1,10 +1,14 @@
-﻿namespace GdbCodaInventarisatie
+﻿using System.Windows.Forms;
+
+namespace GdbCodaInventarisatie
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            RenameCodaFields.Rename(args);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }
