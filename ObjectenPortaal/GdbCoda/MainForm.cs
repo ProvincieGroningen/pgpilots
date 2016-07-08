@@ -24,10 +24,10 @@ namespace GdbCoda
                 textBox2.Text = "Gestart";
                 RenameCodaFields.Rename(textBox1.Text, logText =>
                 {
-                    textBox2.Text = textBox2.Text + Environment.NewLine + logText;
+                    textBox2.Text += Environment.NewLine + logText;
                     Refresh();
                 });
-                textBox2.Text = "Klaar!";
+                textBox2.Text += Environment.NewLine + "Klaar!";
             }
         }
     }
