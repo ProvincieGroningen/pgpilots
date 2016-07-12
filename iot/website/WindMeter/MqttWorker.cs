@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using uPLibrary.Networking.M2Mqtt;
@@ -24,7 +25,7 @@ namespace WindMeter
         {
             client = new MqttClient(brokerHostname);
             client.Connect(Guid.NewGuid().ToString());
-            client.Subscribe(nodes, new[] {MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE});
+            client.Subscribe(nodes.Select(n => $"nodes/{n}/packets").ToArray(), nodes.Select(n => MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE).ToArray());
             client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
             WorkerSupportsCancellation = true;
         }
@@ -51,7 +52,7 @@ namespace WindMeter
             WindReadEvent?.Invoke(this,
                 new WindReadEventArgs
                 {
-                    WindMeasurement = WindMeasurement.FromJson(thingsMessage.DataPlain),
+                    WindMeasurement = WindMeasurement.FromJson(thingsMessage.DataPlain, thingsMessage.NodeEui),
                 });
         }
     }

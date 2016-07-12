@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WindMeter
 {
     public class Global : System.Web.HttpApplication
     {
         private const string MqttBrokerHostname = "croft.thethings.girovito.nl";
-        //private static readonly string[] Nodes = {"nodes/02A29723/packets"};
-        private static readonly string[] Nodes = {"nodes/02017401/packets"};
+
+        public static readonly Dictionary<string, string> Nodes = new Dictionary<string, string>
+        {
+            {"02017401", "Brug 1"},
+            {"02017402", "Brug 2"},
+        };
 
         private static MqttWorker _mqttWorker;
-        public static WindMeasurement LastReceivedWindMeasurement { get; set; }
+        public static readonly Dictionary<string, WindMeasurement> LastReceivedWindMeasurements = new Dictionary<string, WindMeasurement>();
         public static DateTime LastReceived { get; set; }
         public static string Debug { get; private set; }
 
@@ -17,7 +23,7 @@ namespace WindMeter
         {
             try
             {
-                _mqttWorker = new MqttWorker(MqttBrokerHostname, Nodes);
+                _mqttWorker = new MqttWorker(MqttBrokerHostname, Nodes.Keys.ToArray());
                 _mqttWorker.WindReadEvent += _mqttWorker_WindReadEvent;
                 _mqttWorker.RunWorkerAsync();
             }
@@ -29,8 +35,17 @@ namespace WindMeter
 
         private void _mqttWorker_WindReadEvent(object sender, WindReadEventArgs e)
         {
-            LastReceivedWindMeasurement = e.WindMeasurement;
-            LastReceived = DateTime.Now;
+            var measurement = e.WindMeasurement;
+            measurement.ReceivedAt = DateTime.Now;
+            measurement.NodeDescription = Nodes[measurement.NodeEui];
+            if (LastReceivedWindMeasurements.ContainsKey(measurement.NodeEui))
+            {
+                LastReceivedWindMeasurements[measurement.NodeEui] = measurement;
+            }
+            else
+            {
+                LastReceivedWindMeasurements.Add(measurement.NodeEui, measurement);
+            }
         }
 
         protected void Application_End(object sender, EventArgs e)
